@@ -30,11 +30,21 @@ Buffer get_image_buffer(char* dir, int width, int height) {
 }
 
 std::vector<Renderable> get_itb_building();
+std::vector<Renderable> get_itb_lanes() {}
+std::vector<Renderable> get_itb_park() {}
 
 int main()
 {
-	vector<Renderable> peta_itb = get_itb_building();
-	peta_itb = Renderer::clip(peta_itb, 0.5, 0.5, Point(0.0, 0.0));
+	vector<Renderable> itb_building = get_itb_building();
+	vector<Renderable> itb_trees = get_itb_lanes();
+	vector<Renderable> itb_park = get_itb_park();
+
+	bool building_layer = true;
+	bool tree_layer = true;
+	bool park_layer = true;
+
+	vector<Renderable> render_buffer;
+	render_buffer.insert(render_buffer.end(), itb_building.begin(), itb_building.end());
 	Buffer frame_buffer = get_image_buffer("/dev/fb0", 1176, 800);
 
 	char* mb = (char*)malloc(400 * 600 * 4);
@@ -43,7 +53,7 @@ int main()
 	char* tb = (char*)malloc(200 * 300 * 4);
 	Buffer thumbnail_buffer = Buffer(tb, 200, 300);
 
-	for (Renderable rd : peta_itb) {
+	for (Renderable rd : render_buffer) {
 		Renderer::Render_renderable_to_buffer(&rd, &map_buffer);
 		Renderer::Render_renderable_to_buffer(&rd, &thumbnail_buffer);
 	}
@@ -67,7 +77,7 @@ std::vector<Renderable> get_itb_building() {
 	sipil.add_line(Line(Point(0, 0.4), Point(0.15, 0.4)));
 	sipil.add_line(Line(Point(0.15, 0.4), Point(0.15, 0.1)));
 	sipil.add_line(Line(Point(0.15, 0.1), Point(0, 0)));
-	Renderable map_sipil = Renderable(&sipil, Point(0.85, 0));
+	Renderable map_sipil = Renderable(&sipil, Point(0.84, 0));
 	itb_map.push_back(map_sipil);
 
 	Shape seni_rupa = Shape();
@@ -77,7 +87,7 @@ std::vector<Renderable> get_itb_building() {
 	seni_rupa.add_line(Line(Point(0, 0.4), Point(0.15, 0.3)));
 	seni_rupa.add_line(Line(Point(0.15, 0.3), Point(0.15, 0)));
 	seni_rupa.add_line(Line(Point(0.15, 0), Point(0, 0)));
-	Renderable map_seni_rupa = Renderable(&seni_rupa, Point(0.85, 0.6));
+	Renderable map_seni_rupa = Renderable(&seni_rupa, Point(0.84, 0.6));
 	itb_map.push_back(map_seni_rupa);
 
 	Shape labtek = Shape();
@@ -138,7 +148,7 @@ std::vector<Renderable> get_itb_building() {
 
 	itb_map.push_back(gd_pln);
 	itb_map.push_back(labfis);
-
+	
 	return itb_map;
 }
 
