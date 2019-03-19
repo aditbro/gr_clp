@@ -24,9 +24,9 @@ void Renderer::Render_renderable_to_buffer(Renderable* rd, Buffer* buff) {
 		for (int i = 0; i < rd->get_shape()->get_num_of_lines(); i++) {
 			Renderer::Render_line_to_buffer(rd->get_shape()->get_line(i), *rd->get_location(), rd->get_shape()->get_line_color(), buff);
 		}
-		std::cout << std::endl;
+		////std::cout << std::endl;
 
-		//Renderer::Render_color(rd, buff);
+		Renderer::Render_color(rd, buff);
 	}
 	else {
 		for (int i = 0; i < rd->get_shape()->get_num_of_lines(); i++) {
@@ -84,7 +84,7 @@ void Renderer::Render_line_to_buffer(Line* ln, Point init, Color col, Buffer* bu
 	Point p1 = Renderer::get_buffer_point(ln->getP1(), buff);
 	Point p2 = Renderer::get_buffer_point(ln->getP2(), buff);
 	init = Renderer::get_buffer_point(init, buff);
-	std::cout << p1.getX() << "," << p1.getY() << " " << p2.getX() << "," << p2.getY() << std::endl;
+	//std::cout << p1.getX() << "," << p1.getY() << " " << p2.getX() << "," << p2.getY() << std::endl;
 
 	Point p_start;
 	Point p_end;
@@ -158,23 +158,23 @@ std::vector<Renderable> Renderer::clip(std::vector<Renderable> shape_list, doubl
 
 		for (Line ln : rd.get_shape()->get_lines()) {
 			Point prev_point = ln.getP1();
-			//std::cout << "before p1 " << prev_point.getX() << "," << prev_point.getY() << std::endl;
+			////std::cout << "before p1 " << prev_point.getX() << "," << prev_point.getY() << std::endl;
 			prev_point.setX(ratio_i * (prev_point.getX()));
 			prev_point.setY(ratio_j * (prev_point.getY()));
 
 			ln.setP1(prev_point);
-			//std::cout << "p1 " << prev_point.getX() << "," << prev_point.getY() << std::endl;
+			////std::cout << "p1 " << prev_point.getX() << "," << prev_point.getY() << std::endl;
 
 			prev_point = ln.getP2();
-			//std::cout << "before p2 " << prev_point.getX() << "," << prev_point.getY() << std::endl;
+			////std::cout << "before p2 " << prev_point.getX() << "," << prev_point.getY() << std::endl;
 			prev_point.setX(ratio_i * (prev_point.getX()));
 			prev_point.setY(ratio_j * (prev_point.getY()));
 
-			//std::cout << "p2 " << prev_point.getX() << "," << prev_point.getY() << std::endl;
+			////std::cout << "p2 " << prev_point.getX() << "," << prev_point.getY() << std::endl;
 			ln.setP2(prev_point);
 		}
 
-		//std::cout << std::endl;
+		////std::cout << std::endl;
 	}
 
 	return clipped_shape;
@@ -226,11 +226,11 @@ Line clip_line(Line ln, double size_i, double size_j, Point init) {
 
 	Point p1 = ln.getP1();
 	Point p2 = ln.getP2();
-	//std::cout << "p1 " << ln.getP1().getX() << "," << ln.getP1().getY() << std::endl;
-	//std::cout << "p2 " << ln.getP2().getX() << "," << ln.getP2().getY() << std::endl;
-	//std::cout << "m " << m << std::endl;
+	////std::cout << "p1 " << ln.getP1().getX() << "," << ln.getP1().getY() << std::endl;
+	////std::cout << "p2 " << ln.getP2().getX() << "," << ln.getP2().getY() << std::endl;
+	////std::cout << "m " << m << std::endl;
 	if (p1.getX() < top) {
-		//std::cout << "top p1 before " << p1.getX() << "," << p1.getY() << std::endl;
+		////std::cout << "top p1 before " << p1.getX() << "," << p1.getY() << std::endl;
 		p1.setX(top);
 		if (dx > -0.001 && dx < 0.001) {
 			p1.setY(p1.getY());
@@ -238,10 +238,10 @@ Line clip_line(Line ln, double size_i, double size_j, Point init) {
 		else {
 			p1.setY(1 / m * (top - p2.getX()) + p2.getY());
 		}
-		//std::cout << "top p1 after" << p1.getX() << "," << p1.getY() << std::endl;
+		////std::cout << "top p1 after" << p1.getX() << "," << p1.getY() << std::endl;
 	}
 	else if (p1.getX() > bottom) {
-		//std::cout << "bottom p1 before " << p1.getX() << "," << p1.getY() << std::endl;
+		////std::cout << "bottom p1 before " << p1.getX() << "," << p1.getY() << std::endl;
 		p1.setX(bottom);
 		if (dx > -0.001 && dx < 0.001) {
 			p1.setY(p1.getY());
@@ -249,11 +249,11 @@ Line clip_line(Line ln, double size_i, double size_j, Point init) {
 		else {
 			p1.setY(1 / m * (bottom - p2.getX()) + p2.getY());
 		}
-		//std::cout << "bottom p1 after " << p1.getX() << "," << p1.getY() << std::endl;
+		////std::cout << "bottom p1 after " << p1.getX() << "," << p1.getY() << std::endl;
 	}
 
 	if (p1.getY() < leftmost) {
-		//std::cout << "left p1 before " << p1.getX() << "," << p1.getY() << std::endl;
+		////std::cout << "left p1 before " << p1.getX() << "," << p1.getY() << std::endl;
 		p1.setY(leftmost);
 		if (dy > -0.001 && dy < 0.001) {
 			p1.setX(p1.getX());
@@ -261,10 +261,10 @@ Line clip_line(Line ln, double size_i, double size_j, Point init) {
 		else {
 			p1.setX(m * (leftmost - p2.getY()) + p2.getX());
 		}
-		//std::cout << "bottom p1 after " << p1.getX() << "," << p1.getY() << std::endl;
+		////std::cout << "bottom p1 after " << p1.getX() << "," << p1.getY() << std::endl;
 	} 
 	else if (p1.getY() > rightmost) {
-		//std::cout << "right p1 before " << p1.getX() << "," << p1.getY() << std::endl;
+		////std::cout << "right p1 before " << p1.getX() << "," << p1.getY() << std::endl;
 		p1.setY(rightmost);
 		if (dy > -0.001 && dy < 0.001) {
 			p1.setX(p1.getX());
@@ -272,11 +272,11 @@ Line clip_line(Line ln, double size_i, double size_j, Point init) {
 		else {
 			p1.setX(m * (rightmost - p2.getY()) + p2.getX());
 		}
-		//std::cout << "right p1 after " << p1.getX() << "," << p1.getY() << std::endl;
+		////std::cout << "right p1 after " << p1.getX() << "," << p1.getY() << std::endl;
 	}
 
 	if (p2.getX() < top) {
-		//std::cout << "top p2 before " << p2.getX() << "," << p2.getY() << std::endl;
+		////std::cout << "top p2 before " << p2.getX() << "," << p2.getY() << std::endl;
 		p2.setX(top);
 		if (dx > -0.001 && dx < 0.001) {
 			p2.setY(p2.getY());
@@ -284,10 +284,10 @@ Line clip_line(Line ln, double size_i, double size_j, Point init) {
 		else {
 			p2.setY(1 / m * (top - p2.getX()) + p1.getY());
 		}
-		//std::cout << "top p2 after " << p2.getX() << "," << p2.getY() << std::endl;
+		////std::cout << "top p2 after " << p2.getX() << "," << p2.getY() << std::endl;
 	}
 	else if (p2.getX() > bottom) {
-		//std::cout << "bottom p2 before " << p2.getX() << "," << p2.getY() << std::endl;
+		////std::cout << "bottom p2 before " << p2.getX() << "," << p2.getY() << std::endl;
 		p2.setX(bottom);
 		if (dx > -0.001 && dx < 0.001) {
 			p2.setY(p2.getY());
@@ -295,11 +295,11 @@ Line clip_line(Line ln, double size_i, double size_j, Point init) {
 		else {
 			p2.setY(1 / m * (bottom - p1.getX()) + p1.getY());
 		}
-		//std::cout << "bottom p2 after " << p2.getX() << "," << p2.getY() << std::endl;
+		////std::cout << "bottom p2 after " << p2.getX() << "," << p2.getY() << std::endl;
 	}
 
 	if (p2.getY() < leftmost) {
-		//std::cout << "left p2 before " << p2.getX() << "," << p2.getY() << std::endl;
+		////std::cout << "left p2 before " << p2.getX() << "," << p2.getY() << std::endl;
 		p2.setY(leftmost);
 		if (dy > -0.001 && dy < 0.001) {
 			p2.setX(p2.getX());
@@ -307,10 +307,10 @@ Line clip_line(Line ln, double size_i, double size_j, Point init) {
 		else {
 			p2.setX(m * (leftmost - p1.getY()) + p1.getX());
 		}
-		//std::cout << "left p2 after " << p2.getX() << "," << p2.getY() << std::endl;
+		////std::cout << "left p2 after " << p2.getX() << "," << p2.getY() << std::endl;
 	}
 	else if (p2.getY() > rightmost) {
-		//std::cout << "right p2 before " << p2.getX() << "," << p2.getY() << std::endl;
+		////std::cout << "right p2 before " << p2.getX() << "," << p2.getY() << std::endl;
 		p2.setY(rightmost);
 		if (dy > -0.001 && dy < 0.001) {
 			p2.setX(p2.getX());
@@ -318,7 +318,7 @@ Line clip_line(Line ln, double size_i, double size_j, Point init) {
 		else {
 			p2.setX(m * (rightmost - p1.getY()) + p1.getX());
 		}
-		//std::cout << "right p2 after " << p2.getX() << "," << p2.getY() << std::endl;
+		////std::cout << "right p2 after " << p2.getX() << "," << p2.getY() << std::endl;
 	}
 
 	return Line(p1, p2);
@@ -339,31 +339,31 @@ bool is_in_clipping_plane(Renderable& rd, double size_i, double size_j, Point in
 		p1 = Point(ln.getP1().getX() + rd.get_location()->getX(), ln.getP1().getY() + rd.get_location()->getY());
 		p2 = Point(ln.getP2().getX() + rd.get_location()->getX(), ln.getP2().getY() + rd.get_location()->getY());
 
-		if (p1.getY() <= leftmost) {
+		if (p1.getY() < leftmost) {
 			p1_score = p1_score | 1;
 		}
-		if (p2.getY() <= leftmost) {
+		if (p2.getY() < leftmost) {
 			p2_score = p2_score | 1;
 		}
 
-		if (p1.getY() >= rightmost) {
+		if (p1.getY() > rightmost) {
 			p1_score = p1_score | 2;
 		}
-		if (p2.getY() >= rightmost) {
+		if (p2.getY() > rightmost) {
 			p2_score = p2_score | 2;
 		}
 
-		if (p1.getX() <= top) {
+		if (p1.getX() < top) {
 			p1_score = p1_score | 8;
 		}
-		if (p2.getX() <= top) {
+		if (p2.getX() < top) {
 			p2_score = p2_score | 8;
 		}
 
-		if (p1.getX() >= bottom) {
+		if (p1.getX() > bottom) {
 			p1_score = p1_score | 4;
 		}
-		if (p2.getX() >= bottom) {
+		if (p2.getX() > bottom) {
 			p2_score = p2_score | 4;
 		}
 
