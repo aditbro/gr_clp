@@ -43,3 +43,7 @@ char* Color::toPixelArray() {
 
 	return pixelArray;
 }
+
+bool Color::equals(Color c) {
+	return (this->r == c.r && this->g == c.g && this->b == c.b);
+}

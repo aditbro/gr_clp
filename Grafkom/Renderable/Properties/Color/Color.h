@@ -3,9 +3,9 @@
 
 class Color {
 private:
-	int r;
-	int g;
-	int b;
+	char r;
+	char g;
+	char b;
 
 public:
 	Color();
@@ -20,6 +20,7 @@ public:
 	int getBlue();
 
 	char* toPixelArray();
+	bool equals(Color c);
 };
 
 #endif // !COLOR_H

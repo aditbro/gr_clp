@@ -8,5 +8,7 @@
 #include "Renderable/Line/Line.h"
 #include "Renderable/Shape/Shape.h"
 #include "Renderable/Properties/Color/Color.h"
+#include "Buffer/Buffer.h"
+#include "Renderer/Renderer.h"
 
 // TODO: Reference additional headers your program requires here.
