@@ -34,7 +34,7 @@ std::vector<Renderable> get_itb_building();
 int main()
 {
 	vector<Renderable> peta_itb = get_itb_building();
-	peta_itb = Renderer::clip(peta_itb, 0.3, 0.3, Point(0.5, 0.5));
+	//peta_itb = Renderer::clip(peta_itb, 0.3, 0.3, Point(0.5, 0.5));
 	Buffer frame_buffer = get_image_buffer("/dev/fb0", 1176, 800);
 
 	char* mb = (char*)malloc(400 * 600 * 4);
@@ -140,4 +140,30 @@ std::vector<Renderable> get_itb_building() {
 	itb_map.push_back(labfis);
 
 	return itb_map;
+}
+
+std::vector<Renderable> get_tree() {
+	std::vector<Renderable> tree;
+	Shape leafes = Shape();
+	leafes.set_shape_color(Color(0, 255, 0));
+	leafes.set_line_color(Color(255, 255, 255));
+	leafes.add_line(Line(Point(0.00, 0.03), Point(0.09, 0.05)));
+	leafes.add_line(Line(Point(0.09, 0.05), Point(0.09, 0.00)));
+	leafes.add_line(Line(Point(0.09, 0.00), Point(0.00, 0.03)));
+
+	Shape wood = Shape();
+	wood.set_shape_color(Color(255,235,205));
+	wood.set_line_color(Color(255, 255, 255));
+	wood.add_line(Line(Point(0.09, 0.02), Point(0.13, 0.02)));
+	wood.add_line(Line(Point(0.13, 0.02), Point(0.13, 0.03)));
+	wood.add_line(Line(Point(0.13, 0.03), Point(0.09, 0.03)));
+	wood.add_line(Line(Point(0.09, 0.03), Point(0.09, 0.02)));
+
+	// banyakin aja pohonya
+	Renderable daun = Renderable(&leafes, Point(0.375, 0.55));
+	Renderable batang = Renderable(&wood, Point(0.285, 0.55));
+
+	tree.push_back(daun);
+	tree.push_back(batang);
+	return tree;
 }
