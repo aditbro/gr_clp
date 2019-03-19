@@ -152,7 +152,7 @@ std::vector<Renderable> get_tree() {
 	leafes.add_line(Line(Point(0.09, 0.00), Point(0.00, 0.03)));
 
 	Shape wood = Shape();
-	wood.set_shape_color(Color(255,235,205));
+	wood.set_shape_color(Color(222,184,135));
 	wood.set_line_color(Color(255, 255, 255));
 	wood.add_line(Line(Point(0.09, 0.02), Point(0.13, 0.02)));
 	wood.add_line(Line(Point(0.13, 0.02), Point(0.13, 0.03)));
