@@ -34,7 +34,7 @@ std::vector<Renderable> get_itb_building();
 int main()
 {
 	vector<Renderable> peta_itb = get_itb_building();
-	//peta_itb = Renderer::clip(peta_itb, 0.3, 0.3, Point(0.5, 0.5));
+	peta_itb = Renderer::clip(peta_itb, 0.5, 0.5, Point(0.0, 0.0));
 	Buffer frame_buffer = get_image_buffer("/dev/fb0", 1176, 800);
 
 	char* mb = (char*)malloc(400 * 600 * 4);
